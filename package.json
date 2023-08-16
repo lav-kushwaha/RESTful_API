@@ -4,12 +4,15 @@
   "description": "CRUD OPERATIONS",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Lav Kushwaha",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "express": "^4.18.2",
-    "mongoose": "^7.4.3"
+    "mongoose": "^7.4.3",
+    "nodemon": "^3.0.1"
   }
 }
