@@ -50,6 +50,24 @@ app.get("/api/v1/products",async(req,res)=>{
     })
 });
 
+//Update Products.
+app.put("/api/v1/product/:id",async(req,res)=>{
+     //Finding the document by id and updating it's values to req body data.
+    let updProducts = await product.findById(req.params.id);
+    updProducts = await product.findByIdAndUpdate(req.params.id,req.body,{
+            new:true,
+            useFindAndModify:true,
+            runValidators:true
+        });
+    res.status(200).json({
+        success:true,
+        updProducts
+    });
+});
+
+
+
+
 //Creating PORT.
 app.listen(PORT,()=>{
     console.log(`Server is working on:http://localhost:${PORT}`);
