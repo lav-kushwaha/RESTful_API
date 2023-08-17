@@ -92,7 +92,6 @@ app.delete("/api/v1/product/:id",async(req,res)=>{
 });
 
 
-
 //Creating PORT.
 app.listen(PORT,()=>{
     console.log(`Server is working on:http://localhost:${PORT}`);
