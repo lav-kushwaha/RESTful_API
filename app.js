@@ -46,7 +46,8 @@ app.get("/api/v1/products",async(req,res)=>{
     const products = await product.find();
     res.status(200).json({
         success:true,
-        products
+        products,
+        count:products.length
     })
 });
 
@@ -77,19 +78,17 @@ app.put("/api/v1/product/:id",async(req,res)=>{
 //Delete Products.
 app.delete("/api/v1/product/:id",async(req,res)=>{
     let deleteProduct = await product.findById(req.params.id);
-    if(deleteProduct){
-        deleteProduct = await product.findByIdAndDelete(req.params.id);
+    if(!deleteProduct){
         return res.status(200).json({
             success:true,
-            message : "Deleted Successfully."
+            message : "Product Not Found."
         })
     }
-    else{
-        return res.status(500).json({
-            success:false,
-            message:"No product found"
-        });
-    }
+    deleteProduct = await product.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+        success:true,
+        message:"Deleted Successfully!"
+    })
 });
 
 
