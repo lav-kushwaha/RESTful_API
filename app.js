@@ -50,21 +50,47 @@ app.get("/api/v1/products",async(req,res)=>{
     })
 });
 
+
 //Update Products.
 app.put("/api/v1/product/:id",async(req,res)=>{
-     //Finding the document by id and updating it's values to req body data.
+
+    //Finding the document by id and updating it's values to req body data.
     let updProducts = await product.findById(req.params.id);
-    updProducts = await product.findByIdAndUpdate(req.params.id,req.body,{
+    if(!updProducts){
+        return res.status(500).json({
+            success:false,
+            message:"No such a record found"
+        }); 
+    }
+     updProducts = await product.findByIdAndUpdate(req.params.id,req.body,{
             new:true,
-            useFindAndModify:true,
+            useFindAndModify:false,
             runValidators:true
         });
-    res.status(200).json({
+     res.status(200).json({
         success:true,
         updProducts
     });
 });
 
+
+//Delete Products.
+app.delete("/api/v1/product/:id",async(req,res)=>{
+    let deleteProduct = await product.findById(req.params.id);
+    if(deleteProduct){
+        deleteProduct = await product.findByIdAndDelete(req.params.id);
+        return res.status(200).json({
+            success:true,
+            message : "Deleted Successfully."
+        })
+    }
+    else{
+        return res.status(500).json({
+            success:false,
+            message:"No product found"
+        });
+    }
+});
 
 
 
