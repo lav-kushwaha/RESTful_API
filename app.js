@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 
 //Connecting Nodejs with MongoDB.
 mongoose.connect("mongodb://127.0.0.1:27017/RestApi",{
+    //useNewUrlParser: Set to true to use the new MongoDB connection string parser.
+    //useUnifiedTopology: Set to true to use the new Server Discovery and Monitoring engine.
     useNewUrlParser:true,
     useUnifiedTopology:true,
 })
