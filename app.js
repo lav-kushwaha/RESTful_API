@@ -64,8 +64,13 @@ app.put("/api/v1/product/:id",async(req,res)=>{
         }); 
     }
      updProducts = await product.findByIdAndUpdate(req.params.id,req.body,{
+         ////When you set new: true as an option in a Mongoose update operation, 
+         //it tells Mongoose to return the modified document after the update operation has completed.
             new:true,
+         //useFindAndModify: false -> instructs Mongoose to use the newer updateOne, updateMany, findOneAndUpdate, and findOneAndDelete methods instead of only findOneAndUpdate.
             useFindAndModify:false,
+         //runValidators: true ->used for same validation rules that you defined in your schema to the data being updated.
+         //Required fields: Certain fields must have a value.
             runValidators:true
         });
      res.status(200).json({
